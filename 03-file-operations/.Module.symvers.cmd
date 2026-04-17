@@ -1,0 +1,1 @@
+savedcmd_/home/art3mis0/Desktop/linux_kernel/03-file-operations/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/art3mis0/Desktop/linux_kernel/03-file-operations/Module.symvers -n -T /home/art3mis0/Desktop/linux_kernel/03-file-operations/modules.order -i Module.symvers -e 

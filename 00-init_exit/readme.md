@@ -3,7 +3,7 @@
 # load module
     sudo insmod "tên module.ko"
 # Xóa module
-    sudo rmmod "tên module
+    sudo rmmod "tên module"
 # xem bản header-file
     uname -r
 # xem log
