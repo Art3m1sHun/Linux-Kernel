@@ -1,1 +1,0 @@
-savedcmd_/home/art3mis0/Desktop/linux_kernel/00-init_exit/hello.mod := printf '%s\n'   hello.o | awk '!x[$$0]++ { print("/home/art3mis0/Desktop/linux_kernel/00-init_exit/"$$0) }' > /home/art3mis0/Desktop/linux_kernel/00-init_exit/hello.mod

@@ -1,1 +1,0 @@
-savedcmd_/home/art3mis0/Desktop/linux_kernel/03-file-operations/modules.order := {   echo /home/art3mis0/Desktop/linux_kernel/03-file-operations/hello.o; :; } > /home/art3mis0/Desktop/linux_kernel/03-file-operations/modules.order

@@ -74,9 +74,10 @@ __init hello_world_init(void)
   
   /* 02.1 Creating cdev structure */
   cdev_init(&mdev.m_cdev, &fops);
+  
   /* 02.2 Adding character device to the system*/
-  if ((cdev_add(&mdev.m_cdev, mdev.dev_num,ls
-   1)) < 0){
+  if ((cdev_add(&mdev.m_cdev, mdev.dev_num, 1)) < 0)
+  {
     pr_err("Cannot create the struct class for my device\n");
     goto rm_device_numb;
   }

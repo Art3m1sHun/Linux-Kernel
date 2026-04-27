@@ -1,1 +1,0 @@
-savedcmd_/home/art3mis0/Desktop/linux_kernel/02-device-file/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/art3mis0/Desktop/linux_kernel/02-device-file/Module.symvers -n -T /home/art3mis0/Desktop/linux_kernel/02-device-file/modules.order -i Module.symvers -e 

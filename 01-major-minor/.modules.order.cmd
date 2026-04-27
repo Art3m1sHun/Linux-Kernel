@@ -1,1 +1,0 @@
-savedcmd_/home/art3mis0/Desktop/linux_kernel/01-major-minor/modules.order := {   echo /home/art3mis0/Desktop/linux_kernel/01-major-minor/hello.o; :; } > /home/art3mis0/Desktop/linux_kernel/01-major-minor/modules.order

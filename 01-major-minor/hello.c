@@ -1,7 +1,7 @@
 #include <linux/module.h> /* Thu vien dung de dinh nghia cac macro nhu module_init va module_exit */
 #include <linux/fs.h>	/* Thu vien nay dung de dinh nghia cac ham allocate major & minor number */
 
-#define DRIVER_AUTHOR "MinhHung xxxx@gmail.com"
+#define DRIVER_AUTHOR "MinhHung minhhungdenguyn052@gmail.com"
 #define DRIVER_DESC "Hello world kernel module"
 
 struct m_foo_dev{
@@ -14,7 +14,7 @@ static int
 __init hello_world_init(void)
 {
 	/* 1.1 Dynamic allocating device number (cat /pro/devices) */
-	if(alloc_chrdev_region(&mdev.dev_num, 0, 1, "m-cdev") < 0) {
+	if(alloc_chrdev_region(&mdev.dev_num, 0, 1, "test_dev") < 0) {
 		pr_err("Failed to alloc chrdev region\n");
 		return -1;
 	}

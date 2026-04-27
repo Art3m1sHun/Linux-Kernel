@@ -1,1 +1,0 @@
-savedcmd_/home/art3mis0/Desktop/linux_kernel/02-device-file/modules.order := {   echo /home/art3mis0/Desktop/linux_kernel/02-device-file/hello.o; :; } > /home/art3mis0/Desktop/linux_kernel/02-device-file/modules.order
