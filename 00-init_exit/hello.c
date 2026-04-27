@@ -1,7 +1,7 @@
 #include <linux/module.h>
 #include <linux/fs.h>
 
-#define DRIVER_AUTHOR "MinhHung xxxx@gmail.com"
+#define DRIVER_AUTHOR "MinhHung minhhungdenguyn052@gmail.com"
 #define DRIVER_DESC "Hello world kernel module"
 
 // Constructor

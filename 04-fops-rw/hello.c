@@ -5,17 +5,17 @@
 #include <linux/slab.h>       /* Thu vien nay dinh nghia cac ham kmalloc */
 #include <linux/uaccess.h>    /* Thu vien nay dinh nghia cac ham copy_to_user/copy_from_user */
 
-#define DRIVER_AUTHOR "MinhHung xxxx@gmail.com"
+#define DRIVER_AUTHOR "MinhHung minhhungdenguyn052@gmail.com"
 #define DRIVER_DESC "Hello world kernel module"
 
 #define NPAGES 1
 
 struct m_foo_dev{
     int size;
-	  dev_t dev_num; 
-    char *kmallic_ptr;
+	dev_t dev_num; 
+    char *kmalloc_ptr;
   	struct class *m_class;
-	  struct cdev m_cdev;
+	struct cdev m_cdev;
 }mdev;
 
 /* Function Prototypes */
@@ -49,20 +49,47 @@ static int	m_release(struct inode *inode, struct file *file)
   return 0;
 }
 
-/* This function will be called when we read Device file */
-static ssize_t	m_read(struct file *flip, char __user *user_buf, size_t size, loff_t *offset)
+/* This function will be called when we read the Device file */
+static ssize_t m_read(struct file *filp, char __user *user_buf, size_t size, loff_t *offset)
 {
-  pr_info("System call read() called...!!!\n");
-  return 0;
+    size_t to_read;
+
+    pr_info("System call read() called...!!!\n");
+
+    /* Check size doesn't exceed our mapped area size */
+    to_read = (size > mdev.size - *offset) ? (mdev.size - *offset) : size;
+
+	/* Copy from mapped area to user buffer */
+	if (copy_to_user(user_buf, mdev.kmalloc_ptr + *offset, to_read))
+		return -EFAULT;
+
+    *offset += to_read;
+
+	return to_read;
 }
 
-/* This function will be called when we write Device file */
-static ssize_t	m_write(struct file *flip, const char __user *user_buf, size_t size, loff_t *offset)
+/* This function will be called when we write the Device file */
+static ssize_t m_write(struct file *filp, const char __user *user_buf, size_t size, loff_t *offset)
 {
-  pr_info("System call write() called...!!!\n");
-  return size;
-}
+    size_t to_write;
 
+    pr_info("System call write() called...!!!\n");
+
+    /* Check size doesn't exceed our mapped area size */
+    to_write = (size + *offset > NPAGES * PAGE_SIZE) ? (NPAGES * PAGE_SIZE - *offset) : size;
+
+    /* Copy from user buffer to mapped area */
+    memset(mdev.kmalloc_ptr, 0, NPAGES * PAGE_SIZE);
+    if (copy_from_user(mdev.kmalloc_ptr + *offset, user_buf, to_write) != 0)
+        return -EFAULT;
+
+    pr_info("Data from usr: %s", mdev.kmalloc_ptr);
+
+    *offset += to_write;
+    mdev.size = *offset;
+
+    return to_write;
+}
 
 // Constructor
 static int 
@@ -81,8 +108,7 @@ __init hello_world_init(void)
   /* 02.1 Creating cdev structure */
   cdev_init(&mdev.m_cdev, &fops);
   /* 02.2 Adding character device to the system*/
-  if ((cdev_add(&mdev.m_cdev, mdev.dev_num,ls
-   1)) < 0){
+  if ((cdev_add(&mdev.m_cdev, mdev.dev_num,1)) < 0){
     pr_err("Cannot create the struct class for my device\n");
     goto rm_device_numb;
   }
@@ -109,7 +135,7 @@ __init hello_world_init(void)
   return 0;
   
   rm_device:
-    device_destroy(mdev.m_class, mdev.mdev_num);
+    device_destroy(mdev.m_class, mdev.dev_num);
   rm_class:
    class_destroy(mdev.m_class);
   rm_device_numb:
@@ -138,6 +164,5 @@ module_exit(hello_world_exit);
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR(DRIVER_AUTHOR);
 MODULE_DESCRIPTION(DRIVER_DESC);
-
 
 

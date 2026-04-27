@@ -3,7 +3,7 @@
 #include <linux/device.h> /* Thu vien nay dinh nghia cac ham class/create/device_create */
 #include <linux/cdev.h> /* Thu vien nay dinh nghia cac ham cdev_init/cdev_add */
 
-#define DRIVER_AUTHOR "MinhHung xxxx@gmail.com"
+#define DRIVER_AUTHOR "MinhHung minhhungdenguyn052@gmail.com"
 #define DRIVER_DESC "Hello world kernel module"
 
 struct m_foo_dev{

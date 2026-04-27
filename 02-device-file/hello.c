@@ -2,7 +2,7 @@
 #include <linux/fs.h>	/* Thu vien nay dung de dinh nghia cac ham allocate major & minor number */
 #include <linux/device.h> /* Thu vien nay dinh nghia cac ham class/create/device_create */
 
-#define DRIVER_AUTHOR "MinhHung xxxx@gmail.com"
+#define DRIVER_AUTHOR "MinhHung minhhungdenguyn052@gmail.com"
 #define DRIVER_DESC "Hello world kernel module"
 
 struct m_foo_dev{
