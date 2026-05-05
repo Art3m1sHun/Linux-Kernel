@@ -40,12 +40,12 @@ static struct platform_driver mgpio = {
     .remove = mgpio_driver_remove,
     .driver = {
         .name = "descriptor-based",
-        .of_match_table = of_match_ptr(gpiod_dt_ids);
+        .of_match_table = of_match_ptr(gpiod_dt_ids),
         .onwer = THIS_MODULE,
     },
 };
 
-module_platform_driveer(mgpio);
+module_platform_driver(mgpio);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR(DRIVER_AUTHOR);
